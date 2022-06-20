@@ -25,7 +25,7 @@ for (let g1 = 0; g1 < 4; ++g1) {
         .setDescription(description)
         .setColor('#E4B400')
         .setImage(image)
-        .setFooter({text: `Trang: ${a+1}/4`, iconURL: ''}))
+        .setFooter({text: `Trang: ${g1+1}/4`, iconURL: ''}))
 }
 
 const getRow = (id) => {
