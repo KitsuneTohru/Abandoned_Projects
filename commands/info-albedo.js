@@ -54,7 +54,7 @@ module.exports = {
     slash: true,
     callback: async ({user, interaction, channel}) => {
         const id = user.id
-        pages[id] = 0
+        pages[id] = pages[id] || 0
 
         const embed = embeds[pages[id1]]
         let collector
