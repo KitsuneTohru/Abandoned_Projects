@@ -59,7 +59,7 @@ module.exports = {
         const embed = embeds[pages[id]]
         let collector
 
-        const filter = (i) => {return i.user.id === user.id}
+        const filter = (g1) => {return g1.user.id === user.id}
         const time = 1000*60*5
 
       await interaction.reply({
