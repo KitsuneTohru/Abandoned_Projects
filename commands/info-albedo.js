@@ -67,21 +67,21 @@ module.exports = {
             components: [getRow(id)],
         })
         collector = channel.createMessageComponentCollector({ filter, time })
-       await  collector.on('collect', (btnInt) => {
-            if(!btnInt) {
+       await  collector.on('collect', (btnIntg1) => {
+            if(!btnIntg1) {
                 return
             }
-            btnInt.deferUpdate()
+            btnIntg1.deferUpdate()
             if(
-                btnInt.customId !== 'prev' &&
-                btnInt.customId !== 'next'
+                btnIntg1.customId !== 'prev' &&
+                btnIntg1.customId !== 'next'
             )  {
                 return
             }
-            if(btnInt.customId === 'prev' && pages[id]>0) {
+            if(btnIntg1.customId === 'prev' && pages[id]>0) {
                 --pages[id]
             } else if(
-                btnInt.customId === 'next' && pages[id] < embeds.length -1
+                btnIntg1.customId === 'next' && pages[id] < embeds.length -1
             )   {
                 ++pages[id]
             }
