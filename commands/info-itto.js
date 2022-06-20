@@ -29,7 +29,7 @@ for (let g2 = 0; g2 < 5; ++g2) {
         .setFooter({text: `Trang: ${g2+1}/5`, iconURL: ''}))
 }
 
-const getRow = (id2) => {
+const getRow = (id) => {
 const row = new MessageActionRow()
     row.addComponents(
         new MessageButton()
@@ -37,7 +37,7 @@ const row = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('⏪')
         .setLabel('Trang Trước')
-        .setDisabled(pages[id2] === 0)
+        .setDisabled(pages[id] === 0)
     )
     row.addComponents(
         new MessageButton()
@@ -45,7 +45,7 @@ const row = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('⏩')
         .setLabel('Trang Sau')
-        .setDisabled(pages[id2] === embeds.length - 1 )
+        .setDisabled(pages[id] === embeds.length - 1 )
     )
     return row
 }
@@ -54,10 +54,10 @@ module.exports = {
     description: "Show Itto's Stats",
     slash: true,
     callback: async ({user, interaction, channel}) => {
-        const id2 = user.id
-        pages[id2] = pages[id2] || 0
+        const id = user.id
+        pages[id] = 0
 
-        const embed = embeds[pages[id2]]
+        const embed = embeds[pages[id]]
         let collector
 
         const filter = (i) => {return i.user.id === user.id}
@@ -65,7 +65,7 @@ module.exports = {
 
        await interaction.reply({
             embeds:[embed],
-            components: [getRow(id2)],
+            components: [getRow(id)],
         })
         collector = channel.createMessageComponentCollector({ filter, time })
         await  collector.on('collect', (btnInt) => {
@@ -84,11 +84,11 @@ module.exports = {
             } else if(
                 btnInt.customId === 'next' && pages[id2] < embeds.length -1
             )   {
-                ++pages[id2]
+                ++pages[id]
             }
              interaction.editReply({
-                embeds: [embeds[pages[id2]]],
-                components: [getRow(id2)],
+                embeds: [embeds[pages[id]]],
+                components: [getRow(id)],
             })  
         })
     },
