@@ -52,7 +52,7 @@ module.exports = {
     category: 'Geo',
     description: "Show Albedo's Stats",
     slash: true,
-    callback: ({user, interaction, channel}) => {
+    callback: async ({user, interaction, channel}) => {
         const id = user.id
         pages[id] = pages[id] || 0
 
@@ -62,7 +62,7 @@ module.exports = {
         const filter = (i) => {return i.user.id === user.id}
         const time = 1000*60*5
 
-        interaction.reply({
+      await interaction.reply({
             embeds:[embed],
             components: [getRow(id)],
         })
@@ -85,7 +85,7 @@ module.exports = {
             )   {
                 ++pages[id]
             }
-            interaction.editReply({
+           await interaction.editReply({
                 embeds: [embeds[pages[id]]],
                 components: [getRow(id)],
             })  

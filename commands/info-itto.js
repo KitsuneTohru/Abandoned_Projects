@@ -53,7 +53,7 @@ module.exports = {
     category: 'Geo',
     description: "Show Itto's Stats",
     slash: true,
-    callback: ({user, interaction, channel}) => {
+    callback: async ({user, interaction, channel}) => {
         const id2 = user.id
         pages[id2] = pages[id2] || 0
 
@@ -63,7 +63,7 @@ module.exports = {
         const filter = (i) => {return i.user.id === user.id}
         const time = 1000*60*5
 
-        interaction.reply({
+       await interaction.reply({
             embeds:[embed],
             components: [getRow(id2)],
         })
@@ -86,7 +86,7 @@ module.exports = {
             )   {
                 ++pages[id2]
             }
-            interaction.editReply({
+          await  interaction.editReply({
                 embeds: [embeds[pages[id2]]],
                 components: [getRow(id2)],
             })  
