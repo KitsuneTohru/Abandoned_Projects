@@ -86,7 +86,7 @@ module.exports = {
             )   {
                 ++pages[id2]
             }
-          await  interaction.editReply({
+             interaction.editReply({
                 embeds: [embeds[pages[id2]]],
                 components: [getRow(id2)],
             })  
