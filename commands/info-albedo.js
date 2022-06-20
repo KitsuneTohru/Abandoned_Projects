@@ -1,7 +1,7 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require("discord.js")
 
-const embedsg1 = []
-const pagesg1 = {} 
+const embeds = []
+const pages = {} 
 //Nhét Miêu Tả Vô Mấy Cái ' ' Hoặc " ", Nếu Mà " " Mà Fail, Thì Dùng Lấy Cái ' ' Thay Thế
 const descriptions = [
     '<:LArrow:985422675306487829>**__Độ Hiếm__**<:RArrow:985422859994271744>\n  <:5s:985115304961134612><:5s:985115304961134612><:5s:985115304961134612><:5s:985115304961134612><:5s:985115304961134612>\n\n<:LArrow:985422675306487829>**__Mô Tả__**<:RArrow:985422859994271744>\n Người Đứng Đầu Trong Các Giả Kim Thuật Sĩ Kiêm Đội Trưởng Tiểu Đội Điều Tra Của Đội Kỵ Sĩ Tây Phong, Được Gọi Là Thiên Tài "Kreideprinz"\n\n<:LArrow:985422675306487829>**__Vũ Khí__**<:RArrow:985422859994271744>\nKiếm Đơn <:swordnormalatk:985115782319067186>\n\n<:LArrow:985422675306487829>**__Nguyên Liệu__**<:RArrow:985422859994271744>\n> • Sách Thiên Phú: <:ballad:985113941778759680>\n> • Boss: <:childetusk:985114026113630228>\n> • Nguyên Liệu Đột Phá: <:basalt:985114185140666438><:cecilia:985114254095032390><:prithiva:985114127758405683><:devining:985114310638465054>\n\n<:LArrow:985422675306487829>**__Hướng Build__**<:RArrow:985422859994271744>\n Sub-DPS\n\n<:LArrow:985422675306487829>**__Mẹo Kĩ Năng__**<:RArrow:985422859994271744>\nKĩ Năng Nguyên Tố Của Albedo Rơi Các Hạt Tinh Thể Một Cách Random Giống Như Của Zhongli, Nhưng Với Số Lượng Tốt Hơn\n\n<:LArrow:985422675306487829>**__Chỉ Số Chính__**<:RArrow:985422859994271744>\n> •<:sands:985113511413817344> Đồng Hồ: DEF%\n> • <:goblet:985113549447774248> Ly: ST Nham\n> • <:circlet:985113626119639110> Mũ: Tỉ Lệ Bạo/ST Bạo/DEF%\n\n<:LArrow:985422675306487829>**__Chỉ Số Phụ__**<:RArrow:985422859994271744>\n> 1 • Tỉ Lệ Bạo/ST Bạo\n> 2 • DEF%\n> 3 • ATK%\n> 4 • Hiệu Quả Nạp\n> 5 • DEF +n\n> 6 • ATK+n\n\n<:LArrow:985422675306487829>**__Ưu Tiên Thiên Phú__**<:RArrow:985422859994271744>\n Skill > Nộ > Tấn Công Thường',
@@ -19,7 +19,7 @@ const images = [
 for (let a = 0; a < 4; ++a) {
     const description = descriptions[a]
     const image = images[a]
-    embedsg1.push(new MessageEmbed()
+    embeds.push(new MessageEmbed()
         .setTitle('<:albedothink:985135641257984020> **Albedo** <:geo:985117972660092979>')
         .setThumbnail('https://media.discordapp.net/attachments/985111306132684803/985134287571550248/unknown.png') 
         .setDescription(description)
@@ -36,7 +36,7 @@ const row = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('⏪')
         .setLabel('Trang Trước')
-        .setDisabled(pagesg1[id] === 0)
+        .setDisabled(pages[id1] === 0)
     )
     row.addComponents(
         new MessageButton()
@@ -44,7 +44,7 @@ const row = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('⏩')
         .setLabel('Trang Sau')
-        .setDisabled(pagesg1[id] === embedsg1.length - 1 )
+        .setDisabled(pages[id1] === embeds.length - 1 )
     )
     return row
 }
@@ -53,18 +53,18 @@ module.exports = {
     description: "Show Albedo's Stats",
     slash: true,
     callback: ({user, interaction, channel}) => {
-        const id = user.id
-        pagesg1[id] = pagesg1[id] || 0
+        const id1 = user.id
+        pages[id1] = pages[id1] || 0
 
-        const embedg1 = embedsg1[pagesg1[id]]
+        const embed = embeds[pages[id1]]
         let collector
 
         const filter = (i) => {return i.user.id === user.id}
         const time = 1000*60*5
 
         interaction.reply({
-            embeds:[embedg1],
-            components: [getRow(id)],
+            embeds:[embed],
+            components: [getRow(id1)],
         })
         collector = channel.createMessageComponentCollector({ filter, time })
         collector.on('collect', (btnInt) => {
@@ -78,16 +78,16 @@ module.exports = {
             )  {
                 return
             }
-            if(btnInt.customId === 'prev' && pagesg1[id]>0) {
-                --pagesg1[id]
+            if(btnInt.customId === 'prev' && pages[id1]>0) {
+                --pages[id1]
             } else if(
-                btnInt.customId === 'next' && pagesg1[id] < embedsg1.length -1
+                btnInt.customId === 'next' && pages[id1] < embeds.length -1
             )   {
-                ++pagesg1[id]
+                ++pages[id1]
             }
             interaction.editReply({
-                embeds: [embedsg1[pages[id]]],
-                components: [getRow(id)],
+                embeds: [embeds[pages[id1]]],
+                components: [getRow(id1)],
             })  
         })
     },
