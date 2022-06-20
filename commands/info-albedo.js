@@ -56,7 +56,7 @@ module.exports = {
         const id = user.id
         pages[id] = pages[id] || 0
 
-        const embed = embeds[pages[id1]]
+        const embed = embeds[pages[id]]
         let collector
 
         const filter = (i) => {return i.user.id === user.id}
