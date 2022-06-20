@@ -67,7 +67,7 @@ module.exports = {
             components: [getRow(id)],
         })
         collector = channel.createMessageComponentCollector({ filter, time })
-        collector.on('collect', (btnInt) => {
+       await  collector.on('collect', (btnInt) => {
             if(!btnInt) {
                 return
             }
