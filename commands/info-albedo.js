@@ -17,8 +17,8 @@ const images = [
     "",
               ]
 for (let g1 = 0; g1 < 4; ++g1) {
-    const description = descriptions[a]
-    const image = images[a]
+    const description = descriptions[g1]
+    const image = images[g1]
     embeds.push(new MessageEmbed()
         .setTitle('<:albedothink:985135641257984020> **Albedo** <:geo:985117972660092979>')
         .setThumbnail('https://media.discordapp.net/attachments/985111306132684803/985134287571550248/unknown.png') 

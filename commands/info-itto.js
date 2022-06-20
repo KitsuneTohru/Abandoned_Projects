@@ -18,8 +18,8 @@ const images = [
               ]
 //Do Quá Limit 4096 Embed Ở Description Trang 3 => Tách Nó Ra Làm 2
 for (let g2 = 0; g2 < 5; ++g2) {
-    const description = descriptions[a]
-    const image = images[a]
+    const description = descriptions[g2]
+    const image = images[g2]
     embeds.push(new MessageEmbed()
         .setTitle('<:ittoconfidence:985852170823958549> **Arataki Itto** <:geo:985117972660092979>')
         .setThumbnail('https://cdn.discordapp.com/attachments/985136502323417108/986131682170130472/unknown.png ') 
