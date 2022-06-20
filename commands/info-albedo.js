@@ -16,7 +16,7 @@ const images = [
     "",
     "",
               ]
-for (let a = 0; a < 4; ++a) {
+for (let g1 = 0; g1 < 4; ++g1) {
     const description = descriptions[a]
     const image = images[a]
     embeds.push(new MessageEmbed()
@@ -36,7 +36,7 @@ const row = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('⏪')
         .setLabel('Trang Trước')
-        .setDisabled(pages[id1] === 0)
+        .setDisabled(pages[id] === 0)
     )
     row.addComponents(
         new MessageButton()
@@ -44,7 +44,7 @@ const row = new MessageActionRow()
         .setStyle('SECONDARY')
         .setEmoji('⏩')
         .setLabel('Trang Sau')
-        .setDisabled(pages[id1] === embeds.length - 1 )
+        .setDisabled(pages[id] === embeds.length - 1 )
     )
     return row
 }
@@ -53,10 +53,10 @@ module.exports = {
     description: "Show Albedo's Stats",
     slash: true,
     callback: ({user, interaction, channel}) => {
-        const id1 = user.id
-        pages[id1] = pages[id1] || 0
+        const id = user.id
+        pages[id] = pages[id] || 0
 
-        const embed = embeds[pages[id1]]
+        const embed = embeds[pages[id]]
         let collector
 
         const filter = (i) => {return i.user.id === user.id}
@@ -64,7 +64,7 @@ module.exports = {
 
         interaction.reply({
             embeds:[embed],
-            components: [getRow(id1)],
+            components: [getRow(id)],
         })
         collector = channel.createMessageComponentCollector({ filter, time })
         collector.on('collect', (btnInt) => {
@@ -78,16 +78,16 @@ module.exports = {
             )  {
                 return
             }
-            if(btnInt.customId === 'prev' && pages[id1]>0) {
-                --pages[id1]
+            if(btnInt.customId === 'prev' && pages[id]>0) {
+                --pages[id]
             } else if(
-                btnInt.customId === 'next' && pages[id1] < embeds.length -1
+                btnInt.customId === 'next' && pages[id] < embeds.length -1
             )   {
-                ++pages[id1]
+                ++pages[id]
             }
             interaction.editReply({
-                embeds: [embeds[pages[id1]]],
-                components: [getRow(id1)],
+                embeds: [embeds[pages[id]]],
+                components: [getRow(id)],
             })  
         })
     },

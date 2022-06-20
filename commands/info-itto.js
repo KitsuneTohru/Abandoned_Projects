@@ -17,7 +17,7 @@ const images = [
     "",
               ]
 //Do Quá Limit 4096 Embed Ở Description Trang 3 => Tách Nó Ra Làm 2
-for (let a = 0; a < 5; ++a) {
+for (let g2 = 0; g2 < 5; ++g2) {
     const description = descriptions[a]
     const image = images[a]
     embeds.push(new MessageEmbed()
@@ -26,7 +26,7 @@ for (let a = 0; a < 5; ++a) {
         .setDescription(description)
         .setColor('#E4B400')
         .setImage(image)
-        .setFooter({text: `Trang: ${a+1}/5`, iconURL: ''}))
+        .setFooter({text: `Trang: ${g2+1}/5`, iconURL: ''}))
 }
 
 const getRow = (id2) => {
