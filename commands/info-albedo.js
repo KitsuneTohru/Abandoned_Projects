@@ -81,7 +81,7 @@ module.exports = {
             if(btnIntg1.customId === 'prevg1' && pages[id]>0) {
                 --pages[id]
             } else if(
-                btnIntg1.customId === 'nextg1' && pages[id] < embeds.length -1
+                btnIntg1.customId === 'nextg1' && pages[id] < embeds.length-1
             )   {
                 ++pages[id]
             }
