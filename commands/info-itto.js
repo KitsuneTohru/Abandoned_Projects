@@ -33,7 +33,7 @@ const getRow = (id) => {
 const row = new MessageActionRow()
     row.addComponents(
         new MessageButton()
-        .setCustomId('prev')
+        .setCustomId('prevg2')
         .setStyle('SECONDARY')
         .setEmoji('⏪')
         .setLabel('Trang Trước')
@@ -41,7 +41,7 @@ const row = new MessageActionRow()
     )
     row.addComponents(
         new MessageButton()
-        .setCustomId('next')
+        .setCustomId('nextg2')
         .setStyle('SECONDARY')
         .setEmoji('⏩')
         .setLabel('Trang Sau')
@@ -74,15 +74,15 @@ module.exports = {
             }
             btnIntg2.deferUpdate()
             if(
-                btnIntg2.customId !== 'prev' &&
-                btnIntg2.customId !== 'next'
+                btnIntg2.customId !== 'prevg2' &&
+                btnIntg2.customId !== 'nextg2'
             )  {
                 return
             }
-            if(btnIntg2.customId === 'prev' && pages[id]>0) {
+            if(btnIntg2.customId === 'prevg2' && pages[id]>0) {
                 --pages[id]
             } else if(
-                btnIntg2.customId === 'next' && pages[id] < embeds.length -1
+                btnIntg2.customId === 'nextg2' && pages[id] < embeds.length -1
             )   {
                 ++pages[id]
             }
